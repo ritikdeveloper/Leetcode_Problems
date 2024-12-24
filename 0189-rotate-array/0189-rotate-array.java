@@ -3,9 +3,7 @@ class Solution {
         if(nums.length==0||nums.length==1){
             return ;
         }
-        while(k>nums.length){
-            k=k-nums.length;
-        }
+        k=k%nums.length;
         //so first we will revse the array
 
         int start =0;
