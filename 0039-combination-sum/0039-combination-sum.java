@@ -1,31 +1,30 @@
 class Solution {
-  public List<List<Integer>> combinationSum(int[] nums, int target) {
-        List<List<Integer>> ans = new ArrayList<>();
-        List<Integer> temp = new ArrayList<>();
-        Arrays.sort(nums);
-        combination(0, nums, target, 0, ans, temp);
+    public List<List<Integer>> combinationSum(int[] nums, int target) {
+        List<List<Integer>> ans  = new ArrayList<>();
+        List<Integer> current=new ArrayList<>();
+        combiSum(ans,current,nums,0,target);
         return ans;
     }
-
-    public void combination(int index,int[] nums,int target,int current,List<List<Integer>> ans,List<Integer> ans1){
-        if(current == target){
-            ans.add(new ArrayList<>(ans1));
+    public void combiSum(List<List<Integer>> ans,List<Integer> current,int[] nums,int index,int target){
+        int sum = 0;
+        for(int i=0;i<current.size();i++){
+            sum+=current.get(i);
+            
+        }
+        if(sum==target){
+            ans.add(new ArrayList<>(current));
             return;
         }
-       if (current > target || index >= nums.length) {
+        if(sum>target){
             return;
         }
-                for (int i = index; i < nums.length; i++) {
-            if (i > index && nums[i] == nums[i - 1]) {
-                continue; 
-            }
-                }
+        if(index>=nums.length){
+            return;
+        }
 
-        ans1.add(nums[index]);
-        combination(index,nums,target,current+nums[index],ans,ans1);
-        ans1.remove(ans1.size()-1);
-        combination(index+1,nums,target,current,ans,ans1);
-
-
+        current.add(nums[index]);
+        combiSum(ans,current,nums,index,target);
+        current.remove(current.size()-1);
+        combiSum(ans,current,nums,index+1,target);
     }
 }
