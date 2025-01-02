@@ -26,14 +26,13 @@ class Solution {
         return (ans1.equals(ans2)); 
     }
     public void leaf(List<Integer> tree,TreeNode root){
+        if(root==null)return;
         if(root.left==null && root.right==null){
             tree.add(root.val);
-            return;
+            
         }
-        if(root.left==null)
+        
          leaf(tree,root.right);
-         else if(root.right==null) leaf(tree,root.left);
-         else  {leaf(tree,root.right);
-                leaf(tree,root.left);}
+          leaf(tree,root.left);
     }
 }
